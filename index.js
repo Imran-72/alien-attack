@@ -9,7 +9,6 @@
 */
 
 const player = document.querySelector("#player");
-console.log(player);
 
 document.addEventListener("keydown", (event) => {
   switch (event.keyCode) {
@@ -29,18 +28,11 @@ document.addEventListener("keydown", (event) => {
 });
 
 function createBullet() {
-  let bullet = document.createElement("div");
+  const bullet = document.createElement("div");
   bullet.className = "bullet";
   bullet.style.top = player.offsetTop + 60 + "px";
   document.body.appendChild(bullet);
 
-  let timerId = setInterval(() => {
-    bullet.style.left = bullet.offsetLeft + 10 + "px";
-    if (bullet.offsetLeft > document.body.clientWidth) {
-      bullet.remove();
-      clearInterval(timerId);
-    }
-  }, 10);
   let timerId = setInterval(() => {
     bullet.style.left = bullet.offsetLeft + 10 + "px";
     if (bullet.offsetLeft > document.body.clientWidth) {
