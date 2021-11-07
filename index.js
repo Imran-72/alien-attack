@@ -25,6 +25,9 @@ document.addEventListener("keydown", (event) => {
     case 32:
       createBullet();
       break;
+    case 32:
+      createBullet();
+      break;
   }
 });
 
