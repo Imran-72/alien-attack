@@ -25,9 +25,6 @@ document.addEventListener("keydown", (event) => {
     case 32:
       createBullet();
       break;
-    case 32:
-      createBullet();
-      break;
   }
 });
 
@@ -37,6 +34,13 @@ function createBullet() {
   bullet.style.top = player.offsetTop + 60 + "px";
   document.body.appendChild(bullet);
 
+  let timerId = setInterval(() => {
+    bullet.style.left = bullet.offsetLeft + 10 + "px";
+    if (bullet.offsetLeft > document.body.clientWidth) {
+      bullet.remove();
+      clearInterval(timerId);
+    }
+  }, 10);
   let timerId = setInterval(() => {
     bullet.style.left = bullet.offsetLeft + 10 + "px";
     if (bullet.offsetLeft > document.body.clientWidth) {
