@@ -1,5 +1,10 @@
+body {
+  background-image: url(img/gameBack.jpg);
+  background-size: cover;
+}
+
 #player {
-  height: 300px;
+  height: 100px;
   position: absolute;
   top: calc(50% - 225px);
   left: 60px;
@@ -12,22 +17,17 @@
 #player.skin_1 {
   width: 104px;
   height: 135px;
-  background: url(img/rayana_1.jpg) 100% 100% no-repeat;
+  background: url(img/imran_2.jpg) 100% 100% no-repeat;
   background-size: cover;
-}
-
-img {
-  width: 100px;
-  height: 100px;
 }
 
 .enemy {
   position: absolute;
   top: calc(50% - 85px);
   right: 20px;
-  width: 104px;
+  width: 144px;
   height: 135px;
-  background: url(img/rayana_1.jpg) 100% 100% no-repeat;
+  background: url(img/enemy_1.gif) 100% 100% no-repeat;
   background-size: cover;
 }
 .bullet {
@@ -44,4 +44,16 @@ img {
   -webkit-transition: all 1s;
   -moz-transition: all 1s;
   transition: all 0.005s;
+}
+
+.boom {
+  background: url(img/boom.gif) 100% 100% no-repeat;
+  position: absolute;
+  width: 104px;
+  height: 135px;
+  background-size: cover;
+}
+
+.countingMurders {
+  text-align: center;
 }
