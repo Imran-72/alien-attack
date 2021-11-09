@@ -1,6 +1,8 @@
 body {
   background-image: url(img/gameBack.jpg);
   background-size: cover;
+  /* max-width: ;
+  max-height: 850px; */
 }
 
 #player {
@@ -9,9 +11,9 @@ body {
   top: calc(50% - 225px);
   left: 60px;
 
-  /* -webkit-transition: all 1s;
-  -moz-transition: all 1s;
-  transition: all 0.5s; */
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 #player.skin_1 {
@@ -29,6 +31,10 @@ body {
   height: 120px;
   background-image: url(img/enemy_1.gif);
   background-size: cover;
+
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 .bullet {
