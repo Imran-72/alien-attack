@@ -154,6 +154,22 @@ document.addEventListener("keydown", (event) => {
         }, 100);
       }
     }
+    function endGame(lifes) {
+      if (lifes == 0) {
+        setTimeout(() => {
+          alert("End-Game");
+          location.reload();
+        }, 100);
+      }
+    }
+    function endGame(lifes) {
+      if (lifes == 0) {
+        setTimeout(() => {
+          alert("End-Game");
+          location.reload();
+        }, 100);
+      }
+    }
     startGame.remove();
     document.body.append(player);
   }
