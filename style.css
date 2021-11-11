@@ -79,3 +79,19 @@ body .startGame {
   font-size: 20px;
   font-weight: bold;
 }
+
+#lifes {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#lifes span {
+  display: block;
+  margin: 10px;
+  float: left;
+  width: 44px;
+  height: 40px;
+  background: url(img/life.png);
+  background-size: cover;
+}

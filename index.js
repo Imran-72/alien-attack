@@ -110,7 +110,7 @@ document.addEventListener("keydown", (event) => {
         let kils = enemy.offsetLeft + enemy.offsetWidth;
         if (kils < 0) {
           enemy.remove();
-          addLifes(kils);
+          playerDie(kils);
           clearInterval(timerId);
           createEnemy();
         }
@@ -134,18 +134,27 @@ document.addEventListener("keydown", (event) => {
       countingMurders.textContent = `Kills-${kill < 10 ? "0" + kill : kill}`;
     }
 
-    let liveS = 3;
-    const lifes = document.createElement("div");
-    lifes.className = "lifes";
-    lifes.textContent = liveS;
+    let lifes = 3;
 
-    function addLifes(kill, enemy) {
+    function playerDie(kill, enemy) {
+      --lifes;
       if (kill < 0) {
-        lifes.textContent = --liveS;
+        const lifesBlock = document.querySelector("#lifes");
+        const life = lifesBlock.querySelector("span");
+        life.remove();
+        endGame(lifes);
+      }
+    }
+
+    function endGame(lifes) {
+      if (lifes == 0) {
+        setTimeout(() => {
+          alert("End-Game");
+          location.reload();
+        }, 100);
       }
     }
     startGame.remove();
-    document.body.append(lifes);
     document.body.append(player);
   }
 });
