@@ -1,8 +1,6 @@
 body {
-  background-image: url(img/gameBack.jpg);
+  background-image: url(https://wallpaperaccess.com/full/4994666.jpg);
   background-size: cover;
-  /* max-width: ;
-  max-height: 850px; */
 }
 
 #player {
@@ -17,9 +15,16 @@ body {
 }
 
 #player.skin_1 {
-  width: 104px;
+  width: 222px;
   height: 135px;
-  background: url(img/imran_2.jpg) 100% 100% no-repeat;
+  background: url(img/player_1.png) 100% 100% no-repeat;
+  background-size: cover;
+}
+
+#player.skin_2 {
+  width: 185px;
+  height: 135px;
+  background: url(img/player_2.png) 100% 100% no-repeat;
   background-size: cover;
 }
 
@@ -28,8 +33,22 @@ body {
   top: calc(50% - 85px);
   right: 20px;
   width: 150px;
-  height: 120px;
-  background-image: url(img/enemy_1.gif);
+  height: 123px;
+  background-image: url(img/enemy_1.png);
+  background-size: cover;
+
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.enemy_2 {
+  position: absolute;
+  top: calc(50% - 85px);
+  right: 20px;
+  width: 185px;
+  height: 123px;
+  background-image: url(img/enemy_2.png);
   background-size: cover;
 
   -webkit-transition: all 0.2s;
@@ -75,11 +94,21 @@ body .startGame {
   border-radius: 10px;
 }
 
-.countingMurders {
-  font-size: 20px;
-  font-weight: bold;
+.countingMurdersBlock {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
+.countingMurdersBlock span {
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  margin: 10px;
+  float: right;
+  width: 100px;
+  color: crimson;
+}
 #lifes {
   position: absolute;
   top: 20px;

@@ -12,16 +12,48 @@ const startGame = document.createElement("div");
 startGame.className = "startGame";
 startGame.textContent = "Press-enter to Start-Game";
 document.body.prepend(startGame);
+let startClick = 13;
 document.addEventListener("keydown", (event) => {
-  if (event.keyCode == 13) {
+  if (event.keyCode == startClick) {
+    startClick = 0;
+    let gamePause = 27;
+    const docClientHeight = document.documentElement.clientHeight;
     const player = document.createElement("div");
     player.setAttribute("id", "player");
-    player.className = "skin_1";
+    player.className = "skin_2";
     document.addEventListener("keydown", (event) => {
+      if (event.keyCode == gamePause) {
+        alert("Пауза игры");
+      }
+      // if (event.keyCode == 83) {
+      //   player.style.top = player.offsetTop + 100 + "px";
+      //   if (player.offsetTop >= docClientHeight - 160) {
+      //     player.style.top = player.offsetTop + 0 + "px";
+      //     console.log(player.offsetTop);
+      //   }
+      // }
+      // if (player.offsetTop >= 400) {
+      //   player.style.top = player.offsetTop + 0 + "px";
+      // }
+      // if (event.keyCode == 87) {
+      //   player.style.top = player.offsetTop - 100 + "px";
+      //   console.log(player.offsetTop);
+      //   if (player.offsetTop <= docClientHeight - player.offsetTop) {
+      //     player.style.top = player.offsetTop - 0 + "px";
+      //   }
+      // }
+      // if (player.offsetTop === 88) {
+      //   player.style.top = player.offsetTop + 10 + "px";
+      // }
+      // if (event.keyCode == 32) {
+      //   createBullet();
+      // }
       switch (event.keyCode) {
         // Нажали вниз(s)
         case 83:
           player.style.top = player.offsetTop + 100 + "px";
+          console.log("player", player.offsetTop);
+          console.log(document.clientWidth);
           break;
         // Нажали вверх(w)
         case 87:
@@ -69,7 +101,8 @@ document.addEventListener("keydown", (event) => {
       let topB = bullet.offsetTop;
       let bottomB = bullet.offsetTop + bullet.offsetHeight;
 
-      let enemy = document.querySelector(".enemy");
+      // let enemy = document.querySelector(".enemy");
+      let enemy = document.querySelector(".enemy_2");
       if (enemy != null) {
         // Координаты верхней точки противника
         let topE = enemy.offsetTop;
@@ -88,8 +121,8 @@ document.addEventListener("keydown", (event) => {
             ++kill;
             killcounter(kill);
             createEnemy();
-
             clearInterval(timer);
+            bullet.remove();
             if (topB > topE && bottomB < bottomE) {
               bullet.remove();
             }
@@ -101,16 +134,17 @@ document.addEventListener("keydown", (event) => {
     // Создание врага
     function createEnemy() {
       const enemy = document.createElement("div");
-      enemy.className = "enemy";
+      // enemy.className = "enemy";
+      enemy.className = "enemy_2";
       enemy.style.top = random(500, document.body.offsetHeight - 10) + "px";
-      document.body.appendChild(enemy);
+      document.body.append(enemy);
 
       let timerId = setInterval(() => {
         enemy.style.left = enemy.offsetLeft - 10 + "px";
         let kils = enemy.offsetLeft + enemy.offsetWidth;
-        if (kils < 0) {
+        if (kils < 400) {
           enemy.remove();
-          playerDie(kils);
+          playerDie(kils, enemy);
           clearInterval(timerId);
           createEnemy();
         }
@@ -125,23 +159,41 @@ document.addEventListener("keydown", (event) => {
       return Math.floor(rand);
     }
 
-    let countingMurders = document.createElement("div");
-    countingMurders.className = "countingMurders";
-    document.body.appendChild(countingMurders);
+    // Создание элемента жизней
+    const lifesBlock = document.createElement("div");
+    lifesBlock.setAttribute("id", "lifes");
+
+    for (let i = 0; i < 3; i++)
+      lifesBlock.appendChild(document.createElement("span"));
+
+    document.body.append(lifesBlock);
+
+    // Создания элемента счётчика убийств
+    let countingMurdersBlock = document.createElement("div");
+    countingMurdersBlock.className = "countingMurdersBlock";
+
+    let countingMurders = document.createElement("span");
+
+    countingMurdersBlock.append(countingMurders);
+    document.body.append(countingMurdersBlock);
 
     // Счётчик убийств
     function killcounter(kill) {
-      countingMurders.textContent = `Kills-${kill < 10 ? "0" + kill : kill}`;
+      countingMurders.textContent = `Kills - ${kill < 10 ? "0" + kill : kill}`;
     }
 
     let lifes = 3;
 
-    function playerDie(kill, enemy) {
+    function playerDie(kill) {
       --lifes;
-      if (kill < 0) {
+      if (kill < 400) {
         const lifesBlock = document.querySelector("#lifes");
         const life = lifesBlock.querySelector("span");
         life.remove();
+        player.className = "boom";
+        setTimeout(() => {
+          player.className = "skin_2";
+        }, 1000);
         endGame(lifes);
       }
     }
@@ -154,22 +206,7 @@ document.addEventListener("keydown", (event) => {
         }, 100);
       }
     }
-    function endGame(lifes) {
-      if (lifes == 0) {
-        setTimeout(() => {
-          alert("End-Game");
-          location.reload();
-        }, 100);
-      }
-    }
-    function endGame(lifes) {
-      if (lifes == 0) {
-        setTimeout(() => {
-          alert("End-Game");
-          location.reload();
-        }, 100);
-      }
-    }
+
     startGame.remove();
     document.body.append(player);
   }
