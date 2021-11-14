@@ -11,7 +11,7 @@
 // Создаём кнопку для старта игры
 const startGame = document.createElement("div");
 startGame.className = "startGame";
-startGame.textContent = "Press-enter to Start-Game";
+startGame.textContent = "PRESS ENTER TO START GAME";
 
 let startClick = 13;
 
@@ -133,7 +133,7 @@ document.addEventListener("keydown", (e) => {
         const kils = enemy.offsetLeft + enemy.offsetWidth;
         if (kils < 400) {
           enemy.remove();
-          playerDie(kils, enemy);
+          playerDie(kils);
           clearInterval(timerId);
           createEnemy();
         }
@@ -143,6 +143,9 @@ document.addEventListener("keydown", (e) => {
     }
 
     createEnemy();
+    setInterval(() => {
+      createEnemy();
+    }, random(5000, 1000));
 
     function random(min, max) {
       let rand = min + Math.random() * (max + 1 - min);
