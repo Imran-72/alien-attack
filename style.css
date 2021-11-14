@@ -3,6 +3,23 @@ body {
   background-size: cover;
 }
 
+body .startGame {
+  margin: auto;
+  text-align: center;
+  margin-top: 15%;
+  width: 100px;
+  height: 50px;
+  background-color: red;
+  border-radius: 10px;
+}
+
+* {
+  font-family: "Anton", sans-serif;
+  font-family: "Festive", cursive;
+  font-family: "Harmattan", sans-serif;
+  font-family: "Inter", sans-serif;
+}
+
 #player {
   height: 100px;
   position: absolute;
@@ -67,8 +84,9 @@ body {
   border-radius: 2px 7px 7px 2px;
   box-shadow: 0 0 5px #fff, 0 0 8px #fff, 0 0 12px, 0 0 15px red, 0 0 25px red;
   z-index: 5;
-  -webkit-transition: all 1s;
-  -moz-transition: all 1s;
+
+  -webkit-transition: all 0.005s;
+  -moz-transition: all 0.005s;
   transition: all 0.005s;
 }
 
@@ -80,35 +98,22 @@ body {
   background-size: cover;
 }
 
-.countingMurders {
-  text-align: center;
-}
-
-body .startGame {
-  margin: auto;
-  text-align: center;
-  margin-top: 15%;
-  width: 100px;
-  height: 50px;
-  background-color: red;
-  border-radius: 10px;
-}
-
-.countingMurdersBlock {
+.killCounterBlock {
   position: absolute;
   top: 20px;
   left: 20px;
 }
 
-.countingMurdersBlock span {
+.killCounterBlock span {
   font-size: 20px;
   font-weight: bold;
   display: block;
   margin: 10px;
   float: right;
-  width: 100px;
+  width: 110px;
   color: crimson;
 }
+
 #lifes {
   position: absolute;
   top: 20px;

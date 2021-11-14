@@ -3,63 +3,47 @@
 1. Сделать движение игрока вверх и вниз(стрелочки вверх и вниз) done
 2. Сделать выстрел, нажатием на пробел done
 3. Сделать полёт пули done
-4. Сделать проверку попала ли пуля в цель(муха) done
-5. Cделать взрыв при попадании по мухе done
+4. Сделать проверку попала ли пуля в цель done
+5. Cделать взрыв при попадании пули по цели done
 
 */
 
+// Создаём кнопку для старта игры
 const startGame = document.createElement("div");
 startGame.className = "startGame";
 startGame.textContent = "Press-enter to Start-Game";
-document.body.prepend(startGame);
+
 let startClick = 13;
-document.addEventListener("keydown", (event) => {
-  if (event.keyCode == startClick) {
+
+document.addEventListener("keydown", (e) => {
+  if (e.keyCode == startClick) {
     startClick = 0;
-    let gamePause = 27;
+
+    // Создаём кнопку для паузы игры
+    const gamePause = 27;
+
     const docClientHeight = document.documentElement.clientHeight;
+
+    // Создаём игрока
     const player = document.createElement("div");
     player.setAttribute("id", "player");
     player.className = "skin_2";
-    document.addEventListener("keydown", (event) => {
-      if (event.keyCode == gamePause) {
-        alert("Пауза игры");
+
+    document.addEventListener("keydown", (e) => {
+      if (e.keyCode == gamePause) {
+        alert("PAUSE");
       }
-      // if (event.keyCode == 83) {
-      //   player.style.top = player.offsetTop + 100 + "px";
-      //   if (player.offsetTop >= docClientHeight - 160) {
-      //     player.style.top = player.offsetTop + 0 + "px";
-      //     console.log(player.offsetTop);
-      //   }
-      // }
-      // if (player.offsetTop >= 400) {
-      //   player.style.top = player.offsetTop + 0 + "px";
-      // }
-      // if (event.keyCode == 87) {
-      //   player.style.top = player.offsetTop - 100 + "px";
-      //   console.log(player.offsetTop);
-      //   if (player.offsetTop <= docClientHeight - player.offsetTop) {
-      //     player.style.top = player.offsetTop - 0 + "px";
-      //   }
-      // }
-      // if (player.offsetTop === 88) {
-      //   player.style.top = player.offsetTop + 10 + "px";
-      // }
-      // if (event.keyCode == 32) {
-      //   createBullet();
-      // }
-      switch (event.keyCode) {
+
+      switch (e.keyCode) {
         // Нажали вниз(s)
         case 83:
           player.style.top = player.offsetTop + 100 + "px";
-          console.log("player", player.offsetTop);
-          console.log(document.clientWidth);
           break;
         // Нажали вверх(w)
         case 87:
           player.style.top = player.offsetTop - 100 + "px";
           break;
-        //Нажали пробел
+        // Нажали пробел
         case 32:
           createBullet();
           break;
@@ -68,25 +52,26 @@ document.addEventListener("keydown", (event) => {
 
     // Создание пули
     function createBullet() {
-      // Создаём блок для пули
       const bullet = document.createElement("div");
-      // Даём класс пули
       bullet.className = "bullet";
+
       // Задаём начальное значение позиции пули
       bullet.style.top = player.offsetTop + 60 + "px";
-      // Добавляем пулю на игровое поле
-      document.body.appendChild(bullet);
+      document.body.append(bullet);
 
       bulletMove(bullet);
     }
 
+    // Создание функции для движении пули
     function bulletMove(bullet) {
       // Создаём таймер для движения пули
       let timerId = setInterval(() => {
         // Двигаем пулю вправо
         bullet.style.left = bullet.offsetLeft + 10 + "px";
+
         // Проверяем попала ли пуля в мишень
         isShot(bullet, timerId);
+
         if (bullet.offsetLeft > document.body.clientWidth) {
           bullet.remove();
           clearInterval(timerId);
@@ -94,6 +79,7 @@ document.addEventListener("keydown", (event) => {
       }, 10);
     }
 
+    // Счётчик убийств
     let kill = 0;
 
     function isShot(bullet, timer) {
@@ -103,6 +89,7 @@ document.addEventListener("keydown", (event) => {
 
       // let enemy = document.querySelector(".enemy");
       let enemy = document.querySelector(".enemy_2");
+
       if (enemy != null) {
         // Координаты верхней точки противника
         let topE = enemy.offsetTop;
@@ -115,7 +102,9 @@ document.addEventListener("keydown", (event) => {
           enemy.className = "boom";
           enemy.style.top = topE + "px";
           enemy.style.left = leftE + "px";
+
           clearInterval(enemy.dataset.timer);
+
           setTimeout(() => {
             enemy.remove();
             ++kill;
@@ -123,6 +112,7 @@ document.addEventListener("keydown", (event) => {
             createEnemy();
             clearInterval(timer);
             bullet.remove();
+
             if (topB > topE && bottomB < bottomE) {
               bullet.remove();
             }
@@ -137,11 +127,10 @@ document.addEventListener("keydown", (event) => {
       // enemy.className = "enemy";
       enemy.className = "enemy_2";
       enemy.style.top = random(500, document.body.offsetHeight - 10) + "px";
-      document.body.append(enemy);
 
-      let timerId = setInterval(() => {
+      const timerId = setInterval(() => {
         enemy.style.left = enemy.offsetLeft - 10 + "px";
-        let kils = enemy.offsetLeft + enemy.offsetWidth;
+        const kils = enemy.offsetLeft + enemy.offsetWidth;
         if (kils < 400) {
           enemy.remove();
           playerDie(kils, enemy);
@@ -150,6 +139,7 @@ document.addEventListener("keydown", (event) => {
         }
       }, 100);
       enemy.dataset.timer = timerId;
+      document.body.append(enemy);
     }
 
     createEnemy();
@@ -164,50 +154,54 @@ document.addEventListener("keydown", (event) => {
     lifesBlock.setAttribute("id", "lifes");
 
     for (let i = 0; i < 3; i++)
-      lifesBlock.appendChild(document.createElement("span"));
-
-    document.body.append(lifesBlock);
+      lifesBlock.append(document.createElement("span"));
 
     // Создания элемента счётчика убийств
-    let countingMurdersBlock = document.createElement("div");
-    countingMurdersBlock.className = "countingMurdersBlock";
+    const killCounterBlock = document.createElement("div");
+    killCounterBlock.className = "killCounterBlock";
 
-    let countingMurders = document.createElement("span");
-
-    countingMurdersBlock.append(countingMurders);
-    document.body.append(countingMurdersBlock);
+    const killCounter = document.createElement("span");
 
     // Счётчик убийств
     function killcounter(kill) {
-      countingMurders.textContent = `Kills - ${kill < 10 ? "0" + kill : kill}`;
+      killCounter.textContent = `KILLS - ${kill < 10 ? "0" + kill : kill}`;
     }
 
+    // Начальное колличество жизней
     let lifes = 3;
 
+    // Реализация смерти игрока
     function playerDie(kill) {
       --lifes;
+
       if (kill < 400) {
         const lifesBlock = document.querySelector("#lifes");
         const life = lifesBlock.querySelector("span");
         life.remove();
         player.className = "boom";
+
         setTimeout(() => {
           player.className = "skin_2";
         }, 1000);
+
         endGame(lifes);
       }
     }
 
     function endGame(lifes) {
-      if (lifes == 0) {
+      if (lifes === 0) {
         setTimeout(() => {
-          alert("End-Game");
+          alert("END-GAME");
           location.reload();
         }, 100);
       }
     }
 
     startGame.remove();
+    killCounterBlock.append(killCounter);
+    document.body.append(killCounterBlock);
+    document.body.append(lifesBlock);
     document.body.append(player);
   }
 });
+document.body.prepend(startGame);
