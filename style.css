@@ -1,6 +1,7 @@
 body {
   background-image: url(https://wallpaperaccess.com/full/4994666.jpg);
   background-size: cover;
+  margin: 0;
 }
 
 body .startGame {
@@ -45,7 +46,7 @@ body .startGame {
   background-size: cover;
 }
 
-.enemy {
+.enemy_1 {
   position: absolute;
   top: calc(50% - 85px);
   right: 20px;
@@ -126,6 +127,68 @@ body .startGame {
   float: left;
   width: 44px;
   height: 40px;
-  background: url(img/life.png);
+  background: url(img/life_2.png);
   background-size: cover;
+}
+
+#root {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 30px;
+  width: 800px;
+  margin: auto;
+}
+
+.playerCard {
+  background-color: rgb(90, 182, 205);
+  width: 250px;
+  height: 220px;
+  padding: 20px 0 0 20px;
+  align-content: center;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.playerCard:hover {
+  box-shadow: 270px 0 0 0 rgba(0, 0, 0, 0.3) inset;
+  transition: 0.4s;
+}
+
+.playerCard_2 {
+  background-color: rgb(98, 175, 10);
+  width: 250px;
+  height: 220px;
+  padding: 20px 0 0 20px;
+  align-content: center;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.playerCard_2:hover {
+  box-shadow: 270px 0 0 0 rgba(0, 0, 0, 0.3) inset;
+  transition: 0.4s;
+}
+
+.player_1 {
+  width: 222px;
+  height: 135px;
+  margin-top: 10px;
+  background-image: url(img/player_1.png);
+  background-size: cover;
+}
+
+.player_2 {
+  width: 222px;
+  height: 162px;
+  background: url(img/player_2.png) 100% 100% no-repeat;
+  background-size: cover;
+}
+
+.textBlock {
+  margin: 8% auto 0 auto;
+  text-align: center;
+  padding: 10px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: tomato;
 }
