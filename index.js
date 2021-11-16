@@ -58,11 +58,11 @@ document.addEventListener("keydown", (e) => {
     document.body.prepend(textBlock);
 
     root.addEventListener("click", (e) => {
-      if (e.target == playerCard || e.target == player_1) {
+      if (e.target == playerCard || e.target === player_1) {
         player.className = "skin_1";
         clickClass = 1;
       }
-      if (e.target == playerCard_2 || e.target == player_2) {
+      if (e.target == playerCard_2 || e.target === player_2) {
         player.className = "skin_2";
         clickClass = 2;
       }
@@ -232,7 +232,7 @@ document.addEventListener("keydown", (e) => {
           player.className = "boom";
 
           setTimeout(() => {
-            player.className = "skin_2";
+            player.className = "skin_" + (clickClass === 1 ? "1" : "2");
           }, 1000);
 
           endGame(lifes);
